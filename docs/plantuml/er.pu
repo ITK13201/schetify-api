@@ -1,0 +1,83 @@
+@startuml
+
+!include ./config/default.inc
+
+entity users {
+    + id: string [PK]
+    --
+    * username: string, not null
+    * email: string
+    * firebase_id: string, not null
+    * twitter_id: string
+    * google_id: string
+    created_at: timestamp
+    updated_at: timestamp
+}
+
+entity users_events {
+    + id: integer [PK]
+    --
+    * user_id, integer, not null [FK]
+    * event_id, integer, not null [FK]
+    label: integer, not null
+    created_at: timestamp
+    updated_at: timestamp
+}
+
+entity events {
+    + id: integer [PK]
+    --
+    * name: string, not null
+    start_at: datetime
+    end_at: datetime
+    image_url: string
+    location_name: string
+    location_address: string
+    location_latitude: float
+    location_longitude: float
+    group_num: integer
+    total_cost: integer
+    questionnaire_url: string
+    pattern: integer
+    created_at: timestamp
+    updated_at: timestamp
+}
+
+entity notifications {
+    + id: integer [PK]
+    --
+    * event_id: integer, not null [FK]
+    title: string, not null
+    contents: string, not null
+    created_at: timestamp
+    updated_at: timestamp
+}
+
+entity attend_status {
+    + id: integer [PK]
+    --
+    * schedule_candidate_id: integer, not null [FK]
+    * user_id: string, not null [FK]
+    status: integer, not null
+    created_at: timestamp
+    updated_at: timestamp
+}
+
+entity schedule_candidates {
+    + id: integer [PK]
+    --
+    * event_id: integer, not null [FK]
+    start_at: datetime
+    end_at: datetime
+    created_at: timestamp
+    updated_at: timestamp
+}
+
+users ||-le-o{ users_events
+users_events  }|--|| events
+events ||--o{ notifications
+users ||--o{ attend_status
+attend_status }o--|| schedule_candidates
+events ||--o{ schedule_candidates
+
+@enduml
