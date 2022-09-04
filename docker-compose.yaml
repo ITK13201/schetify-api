@@ -1,0 +1,42 @@
+version: '3'
+services:
+  backend:
+    platform: linux/x86_64
+    build:
+      dockerfile: ./docker/backend/Dockerfile
+      context: .
+      target: development
+    env_file: ./backend/.env
+    volumes:
+      - ./backend:/backend
+      - ./docker/backend/entrypoint.sh:/usr/bin/entrypoint.sh
+    ports:
+      - 8000:8000
+    environment:
+      PORT: "8000"
+      TZ: "Asia/Tokyo"
+    depends_on:
+      - mysql
+
+  mysql:
+    platform: linux/x86_64
+    build:
+      dockerfile: ./docker/mysql/Dockerfile
+      context: .
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_USER: "user"
+      MYSQL_PASSWORD: "password"
+      MYSQL_DATABASE: "schetify"
+      TZ: "Asia/Tokyo"
+    ports:
+      - 3306:3306
+    volumes:
+      - ./docker/mysql/conf.d:/etc/mysql/conf.d
+      - mysql:/var/lib/mysql
+      - ./log/mysql:/var/log/mysql
+
+volumes:
+  mysql:
+    driver: local
