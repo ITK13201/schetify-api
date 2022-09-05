@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module IdGenerator
+module UuidGenerator
   def self.included(klass)
     klass.before_create :fill_id
   end
