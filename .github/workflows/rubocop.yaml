@@ -18,6 +18,6 @@ jobs:
         with:
           workdir: ./backend
           rubocop_version: gemfile
-          rubocop_flags: --config ./backend/.rubocop.yml ./backend
+          rubocop_flags: --config .rubocop.yml .
           rubocop_extensions: rubocop-rails:gemfile rubocop-rspec:gemfile
           reporter: github-pr-review # Default is github-pr-check
