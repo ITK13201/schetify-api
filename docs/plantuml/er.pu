@@ -10,8 +10,8 @@ entity users {
     * firebase_id: string, not null
     * twitter_id: string
     * google_id: string
-    created_at: timestamp
-    updated_at: timestamp
+    created_at: datetime
+    updated_at: datetime
 }
 
 entity users_events {
@@ -20,8 +20,8 @@ entity users_events {
     * user_id: integer, not null [FK]
     * event_id: integer, not null [FK]
     label: integer, not null
-    created_at: timestamp
-    updated_at: timestamp
+    created_at: datetime
+    updated_at: datetime
 }
 
 entity events {
@@ -39,8 +39,8 @@ entity events {
     total_cost: integer
     questionnaire_url: string
     pattern: integer
-    created_at: timestamp
-    updated_at: timestamp
+    created_at: datetime
+    updated_at: datetime
 }
 
 entity notifications {
@@ -49,18 +49,18 @@ entity notifications {
     * event_id: integer, not null [FK]
     title: string, not null
     contents: string, not null
-    created_at: timestamp
-    updated_at: timestamp
+    created_at: datetime
+    updated_at: datetime
 }
 
-entity attend_status {
+entity attend_statuses {
     + id: integer [PK]
     --
     * schedule_candidate_id: integer, not null [FK]
     * user_id: string, not null [FK]
     status: integer, not null
-    created_at: timestamp
-    updated_at: timestamp
+    created_at: datetime
+    updated_at: datetime
 }
 
 entity schedule_candidates {
@@ -69,15 +69,15 @@ entity schedule_candidates {
     * event_id: integer, not null [FK]
     start_at: datetime
     end_at: datetime
-    created_at: timestamp
-    updated_at: timestamp
+    created_at: datetime
+    updated_at: datetime
 }
 
-users ||-le-o{ users_events
-users_events  }|--|| events
-events ||--o{ notifications
-users ||--o{ attend_status
-attend_status }o--|| schedule_candidates
-events ||--o{ schedule_candidates
+users ||-do-o{ users_events: id:user_id
+users_events  }|-do-|| events: event_id:id
+events ||-do-o{ notifications: id: event_id
+users ||-ri-o{ attend_statuses: id:user_id
+attend_statuses }o-do-|| schedule_candidates: schedule_candidate_id:id
+schedule_candidates }o-do-|| events: event_id:id
 
 @enduml
