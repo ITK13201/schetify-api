@@ -1,5 +1,6 @@
 require:
   - rubocop-rails
+  - rubocop-rspec
 
 inherit_from: .rubocop_todo.yml
 
@@ -22,5 +23,5 @@ AllCops:
     - "app/helpers/admin/*"
     - "app/controllers/admin/admins/*"
 
-Documentation:
+Style/Documentation:
   Enabled: false
