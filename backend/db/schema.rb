@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_05_100159) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_05_165454) do
+  create_table "events", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.string "image_url"
+    t.string "location_name"
+    t.string "location_address"
+    t.float "location_latitude"
+    t.float "location_longitude"
+    t.integer "group_num"
+    t.integer "total_cost"
+    t.string "questionnaire_url"
+    t.integer "pattern"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_events_on_name", unique: true
+  end
+
   create_table "users", id: { type: :string, limit: 36 }, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "username", null: false
     t.string "email"
