@@ -17,8 +17,8 @@ entity users {
 entity users_events {
     + id: integer [PK]
     --
-    * user_id, integer, not null [FK]
-    * event_id, integer, not null [FK]
+    * user_id: integer, not null [FK]
+    * event_id: integer, not null [FK]
     label: integer, not null
     created_at: timestamp
     updated_at: timestamp
