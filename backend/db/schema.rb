@@ -10,5 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 0) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_05_100159) do
+  create_table "users", id: { type: :string, limit: 36 }, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "username", null: false
+    t.string "email"
+    t.string "firebase_id", null: false
+    t.string "twitter_id"
+    t.string "google_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["firebase_id"], name: "index_users_on_firebase_id", unique: true
+    t.index ["google_id"], name: "index_users_on_google_id", unique: true
+    t.index ["twitter_id"], name: "index_users_on_twitter_id", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
+  end
+
 end
