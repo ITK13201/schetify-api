@@ -17,8 +17,8 @@ entity users {
 entity users_events {
     + id: integer [PK]
     --
-    * user_id: integer, not null [FK]
-    * event_id: integer, not null [FK]
+    # user_id: integer, not null [FK]
+    # event_id: integer, not null [FK]
     label: integer, not null
     group_id: integer
     created_at: datetime
@@ -47,7 +47,7 @@ entity events {
 entity notifications {
     + id: integer [PK]
     --
-    * event_id: integer, not null [FK]
+    # event_id: integer, not null [FK]
     title: string, not null
     contents: string, not null
     created_at: datetime
@@ -57,8 +57,8 @@ entity notifications {
 entity attend_statuses {
     + id: integer [PK]
     --
-    * schedule_candidate_id: integer, not null [FK]
-    * user_id: string, not null [FK]
+    # schedule_candidate_id: integer, not null [FK]
+    # user_id: string, not null [FK]
     status: integer, not null
     created_at: datetime
     updated_at: datetime
@@ -67,7 +67,7 @@ entity attend_statuses {
 entity schedule_candidates {
     + id: integer [PK]
     --
-    * event_id: integer, not null [FK]
+    # event_id: integer, not null [FK]
     start_at: datetime
     end_at: datetime
     created_at: datetime
