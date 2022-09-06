@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_06_012258) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_06_021159) do
   create_table "events", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "start_at"
@@ -27,6 +27,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_06_012258) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_events_on_name", unique: true
+  end
+
+  create_table "notifications", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.string "title", null: false
+    t.string "contents", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "fk_rails_78f4b5a537"
   end
 
   create_table "users", id: { type: :string, limit: 36 }, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
@@ -55,6 +64,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_06_012258) do
     t.index ["user_id"], name: "fk_rails_3fe6b760ff"
   end
 
+  add_foreign_key "notifications", "events", on_delete: :cascade
   add_foreign_key "users_events", "events", on_delete: :cascade
   add_foreign_key "users_events", "users", on_delete: :cascade
 end
