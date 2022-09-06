@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_06_022112) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_06_022716) do
+  create_table "attend_statuses", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "user_id", limit: 36, null: false
+    t.bigint "schedule_candidate_id", null: false
+    t.integer "status", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["schedule_candidate_id"], name: "fk_rails_60d54bba87"
+    t.index ["user_id"], name: "fk_rails_1cb3372865"
+  end
+
   create_table "events", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "start_at"
@@ -73,6 +83,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_06_022112) do
     t.index ["user_id"], name: "fk_rails_3fe6b760ff"
   end
 
+  add_foreign_key "attend_statuses", "schedule_candidates", on_delete: :cascade
+  add_foreign_key "attend_statuses", "users", on_delete: :cascade
   add_foreign_key "notifications", "events", on_delete: :cascade
   add_foreign_key "schedule_candidates", "events", on_delete: :cascade
   add_foreign_key "users_events", "events", on_delete: :cascade
