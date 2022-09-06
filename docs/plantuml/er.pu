@@ -20,6 +20,7 @@ entity users_events {
     * user_id: integer, not null [FK]
     * event_id: integer, not null [FK]
     label: integer, not null
+    group_id: integer
     created_at: datetime
     updated_at: datetime
 }
