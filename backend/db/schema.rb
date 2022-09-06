@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_05_165454) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_06_012258) do
   create_table "events", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "start_at"
@@ -44,4 +44,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_05_165454) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  create_table "users_events", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "user_id", limit: 36, null: false
+    t.bigint "event_id", null: false
+    t.integer "label", null: false
+    t.integer "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "fk_rails_973e1aefd3"
+    t.index ["user_id"], name: "fk_rails_3fe6b760ff"
+  end
+
+  add_foreign_key "users_events", "events", on_delete: :cascade
+  add_foreign_key "users_events", "users", on_delete: :cascade
 end
