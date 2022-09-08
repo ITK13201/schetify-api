@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_09_08_040355) do
-  create_table "attend_statuses", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "attend_statuses", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "user_id", limit: 36, null: false
     t.bigint "schedule_candidate_id", null: false
     t.integer "status", null: false
@@ -21,7 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_08_040355) do
     t.index ["user_id"], name: "fk_rails_1cb3372865"
   end
 
-  create_table "events", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "events", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "start_at"
     t.datetime "end_at"
@@ -40,7 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_08_040355) do
     t.text "description"
   end
 
-  create_table "notifications", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "notifications", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.bigint "event_id", null: false
     t.string "title", null: false
     t.string "contents", null: false
@@ -49,7 +49,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_08_040355) do
     t.index ["event_id"], name: "fk_rails_78f4b5a537"
   end
 
-  create_table "schedule_candidates", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "schedule_candidates", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.bigint "event_id", null: false
     t.datetime "start_at", null: false
     t.datetime "end_at", null: false
@@ -58,7 +58,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_08_040355) do
     t.index ["event_id"], name: "fk_rails_8bee898721"
   end
 
-  create_table "users", id: { type: :string, limit: 36 }, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "users", id: { type: :string, limit: 36 }, charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "username", null: false
     t.string "email"
     t.string "firebase_id", null: false
@@ -73,7 +73,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_08_040355) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  create_table "users_events", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "users_events", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "user_id", limit: 36, null: false
     t.bigint "event_id", null: false
     t.integer "label", null: false
