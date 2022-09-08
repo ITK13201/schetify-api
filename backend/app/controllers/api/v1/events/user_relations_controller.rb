@@ -4,6 +4,14 @@ module Api
   module V1
     module Events
       class UserRelationsController < ApplicationController
+        def create
+          UsersEvent.create!({ user_id: @user.id, event_id: params[:event_id] })
+        rescue ActiveRecord::RecordInvalid => e
+          render json: { message: e.message }, status: :bad_request
+        else
+          render json: { message: 'Successfully created user_event_relations.' }
+        end
+
         def update
           data = params['_json']
           ApplicationRecord.transaction do
