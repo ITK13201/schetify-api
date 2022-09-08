@@ -114,27 +114,18 @@ module Api
       def update
         Event.update(
           params[:id],
-          {
-            name: params[:name],
-            description: params[:description],
-            start_at: params[:start_at],
-            end_at: params[:end_at],
-            image_url: params[:image_url],
-            location_name: params[:location_name],
-            location_address: params[:location_address],
-            location_latitude: params[:location_latitude],
-            location_longitude: params[:location_longitude],
-            group_num: params[:group_num],
-            cost: params[:cost],
-            cost_type: params[:cost_type].nil? ? 0 : Event.cost_types[params[:cost_type]],
-            questionnaire_url: params[:questionnaire_url],
-            pattern: params[:pattern]
-          }
+          event_params
         )
       rescue ActiveRecord::RecordInvalid => e
         render json: { message: e.message }, status: :bad_request
       else
         render json: { message: 'Successfully updated event.' }, status: :ok
+      end
+
+      private
+      def event_params
+        params[:cost_type] = params[:cost_type].nil? ? 0 : Event.cost_types[params[:cost_type]]
+        params.permit(:name, :description, :start_at, :end_at, :image_url, :location_name, :location_latitude, :location_longitude, :location_address, :group_num, :cost, :cost_type, :questionnaire_url, :pattern)
       end
     end
   end
