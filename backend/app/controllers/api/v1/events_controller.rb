@@ -101,7 +101,7 @@ module Api
         event_description = params[:description]
         ApplicationRecord.transaction do
           event = Event.create({ name: event_name, description: event_description })
-          UsersEvent.create({ user_id: @user.id, event_id: event.id, label: UsersEvent.labels[:owner] })
+          UsersEvent.create({ user_id: @user.id, id: event.id, label: UsersEvent.labels[:owner] })
           render json: {
             message: 'Successfully created event and linked logged-in users to created events.',
             event_id: event.id
