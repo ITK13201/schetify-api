@@ -16,7 +16,13 @@ module Api
           data = params['_json']
           ApplicationRecord.transaction do
             data.each do |d|
-              UsersEvent.update!(d['id'], { label: d['label'], group_id: d['group_id'] })
+              UsersEvent.update!(
+                d['id'],
+                {
+                  label: d['label'].nil? ? 0 : UsersEvent.labels[d['label']],
+                  group_id: d['group_id']
+                }
+              )
             end
           end
         rescue ActiveRecord::RecordInvalid => e

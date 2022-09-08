@@ -126,7 +126,7 @@ module Api
             location_longitude: params[:location_longitude],
             group_num: params[:group_num],
             cost: params[:cost],
-            cost_type: params[:cost_type],
+            cost_type: params[:cost_type].nil? ? 0 : Event.cost_types[params[:cost_type]],
             questionnaire_url: params[:questionnaire_url],
             pattern: params[:pattern]
           }
