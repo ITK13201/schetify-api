@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_06_022716) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_07_194633) do
   create_table "attend_statuses", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "user_id", limit: 36, null: false
     t.bigint "schedule_candidate_id", null: false
@@ -31,11 +31,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_06_022716) do
     t.float "location_latitude"
     t.float "location_longitude"
     t.integer "group_num"
-    t.integer "total_cost"
+    t.integer "cost"
     t.string "questionnaire_url"
     t.integer "pattern"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "cost_type", default: 0, null: false
+    t.text "description"
     t.index ["name"], name: "index_events_on_name", unique: true
   end
 
