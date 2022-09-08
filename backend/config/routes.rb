@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  post 'user', to: 'user#create_user'
+  scope '/api/v1' do
+    post 'user', to: 'user#create_user'
+  end
 end

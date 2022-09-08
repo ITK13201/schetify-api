@@ -57,11 +57,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_113011) do
     t.index ["event_id"], name: "fk_rails_8bee898721"
   end
 
-  create_table "tests", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", id: { type: :string, limit: 36 }, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "username", null: false
     t.string "email"
