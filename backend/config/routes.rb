@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         put ':event_id/schedule_candidates', to: 'schedule_candidates#update'
         put ':event_id/user_relations', to: 'user_relations#update'
         get ':event_id/attend_statuses', to: 'attend_statuses#index'
+        put ':event_id/attend_statuses', to: 'attend_statuses#update'
       end
     end
   end

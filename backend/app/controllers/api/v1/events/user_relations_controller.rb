@@ -11,7 +11,7 @@ module Api
               UsersEvent.update!(d['id'], { label: d['label'], group_id: d['group_id'] })
             end
           end
-        rescue ActiveRecordError => e
+        rescue ActiveRecord::RecordInvalid => e
           render json: { message: e.message }, status: :bad_request
         else
           render json: { message: 'Successfully updated user_event_relations.' }
