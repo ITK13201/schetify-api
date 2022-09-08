@@ -4,6 +4,32 @@ module Api
   module V1
     class EventsController < ApplicationController
       def index
+        events = Event.all.includes(users_events: :user).where(users_events: { user_id: @user.id })
+        results = []
+        events.each do |event|
+          result = {
+            id: event.id,
+            name: event.name,
+            description: event.description,
+            start_at: event.start_at,
+            end_at: event.end_at,
+            image_url: event.image_url,
+            location_name: event.location_name,
+            location_address: event.location_address,
+            location_latitude: event.location_latitude,
+            location_longitude: event.location_longitude,
+            group_num: event.group_num,
+            cost: event.cost,
+            cost_type: event.cost_type,
+            questionnaire_url: event.questionnaire_url,
+            pattern: event.pattern
+          }
+          results.push(result)
+        end
+        render json: results
+      end
+
+      def show
         event_id = params[:id]
         events = Event.all
                       .includes(users_events: :user, schedule_candidates: { attend_statuses: :user })
