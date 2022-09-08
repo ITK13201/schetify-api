@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       post 'user', to: 'user#create_user'
       get 'events', to: 'events#index'
       get 'events/:id', to: 'events#show'
+      post 'events', to: 'events#create'
     end
   end
 end
