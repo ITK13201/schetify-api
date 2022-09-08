@@ -44,7 +44,7 @@ ApplicationRecord.transaction do
       location_longitude: Faker::Address.longitude,
       group_num: Faker::Number.between(from: 2, to: 100),
       cost: Faker::Number.between(from: 100, to: 100000),
-      cost_type: Faker::Number.between(from: 0, to: 2),
+      cost_type: Faker::Number.between(from: 0, to: 1),
       questionnaire_url: Faker::Internet.url,
       pattern: Faker::Number.between(from: 0, to: 2),
     }
