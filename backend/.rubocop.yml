@@ -32,5 +32,17 @@ Metrics/MethodLength:
 Metrics/ClassLength:
   Max: 1000
 
+Metrics/CyclomaticComplexity:
+  Max: 100
+
+Style/CombinableLoops:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Max: 100
+
+Rails/SkipsModelValidations:
+  Enabled: false
+
 Style/Documentation:
   Enabled: false
