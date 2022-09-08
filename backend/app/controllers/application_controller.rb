@@ -17,6 +17,7 @@ class ApplicationController < ActionController::API
     user = User.find_by(firebase_id: params[:uid])
     render json: { message: 'Invalid user!' }, status: :forbidden unless user
     @user = user
+  end
 
   # def find_dummy_user
   #   @user = User.all.limit(1)[0]
