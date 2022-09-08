@@ -110,6 +110,32 @@ module Api
           render json: { message: e.message }, status: :bad_request
         end
       end
+
+      def update
+        Event.update(
+          params[:id],
+          {
+            name: params[:name],
+            description: params[:description],
+            start_at: params[:start_at],
+            end_at: params[:end_at],
+            image_url: params[:image_url],
+            location_name: params[:location_name],
+            location_address: params[:location_address],
+            location_latitude: params[:location_latitude],
+            location_longitude: params[:location_longitude],
+            group_num: params[:group_num],
+            cost: params[:cost],
+            cost_type: params[:cost_type],
+            questionnaire_url: params[:questionnaire_url],
+            pattern: params[:pattern]
+          }
+        )
+      rescue ActiveRecord::RecordInvalid => e
+        render json: { message: e.message }, status: :bad_request
+      else
+        render json: { message: 'Successfully updated event.' }, status: :ok
+      end
     end
   end
 end
