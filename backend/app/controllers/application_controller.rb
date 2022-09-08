@@ -2,6 +2,7 @@ class ApplicationController < ActionController::API
   include ActionController::HttpAuthentication::Token::ControllerMethods
   before_action :authenticate
   before_action :find_user
+  # before_action :find_dummy_user
 
   def authenticate
     authenticate_or_request_with_http_token do |token, _options|
@@ -15,6 +16,9 @@ class ApplicationController < ActionController::API
   def find_user
     user = User.find_by(firebase_id: params[:uid])
     render json: { message: 'Invalid user!' }, status: :forbidden unless user
-    params[:user] = user
-  end
+    @user = user
+
+  # def find_dummy_user
+  #   @user = User.all.limit(1)[0]
+  # end
 end

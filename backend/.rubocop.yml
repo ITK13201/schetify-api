@@ -23,5 +23,11 @@ AllCops:
     - "app/helpers/admin/*"
     - "app/controllers/admin/admins/*"
 
+Metrics/AbcSize:
+  Max: 100
+
+Metrics/MethodLength:
+  Max: 100
+
 Style/Documentation:
   Enabled: false
