@@ -8,11 +8,11 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-N = 100
+N = 10
 
 ApplicationRecord.transaction do
   users = []
-  N.times do |t|
+  (N*10).times do |t|
     user = {
       username: Faker::Internet.username,
       email: Faker::Internet.email,
@@ -53,7 +53,7 @@ ApplicationRecord.transaction do
     events.push(event)
   end
 
-  (N*4).times do |t|
+  (N*40).times do |t|
     user_event_relation_event = events.sample
     user_event_relation = {
       user_id: users.sample.id,
@@ -66,7 +66,7 @@ ApplicationRecord.transaction do
   end
 
   schedule_candidates = []
-  (N*8).times do |t|
+  (N*80).times do |t|
     schedule_candidate = {
       event_id: events.sample.id,
       start_at: Faker::Time.between_dates(from: Date.today - 10, to: Date.today - 1),
@@ -77,7 +77,7 @@ ApplicationRecord.transaction do
     schedule_candidates.push(schedule_candidate)
   end
 
-  (N*16).times do |t|
+  (N*160).times do |t|
     attend_status = {
       schedule_candidate_id: schedule_candidates.sample.id,
       user_id: users.sample.id,
