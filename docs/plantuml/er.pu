@@ -29,6 +29,7 @@ entity events {
     + id: integer [PK]
     --
     * name: string, not null
+    description: text
     start_at: datetime
     end_at: datetime
     image_url: string
@@ -37,7 +38,8 @@ entity events {
     location_latitude: float
     location_longitude: float
     group_num: integer
-    total_cost: integer
+    cost: integer
+    cost_type: integer, not null, default: 0
     questionnaire_url: string
     pattern: integer
     created_at: datetime
