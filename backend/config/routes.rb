@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get 'events/:id', to: 'events#show'
       post 'events', to: 'events#create'
       put 'events/:id', to: 'events#update'
+      get 'notifications', to: 'notifications#index'
       namespace 'events' do
         put ':event_id/schedule_candidates', to: 'schedule_candidates#update'
         post ':event_id/user_relations', to: 'user_relations#create'
