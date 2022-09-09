@@ -3,20 +3,13 @@
 module Api
   module V1
     class NotificationsController < ApplicationController
+      skip_before_action :find_user, only: :index
+
       def index
-        notifications = @user.notifications
-        results = []
-        notifications.each do |notification|
-          result = {
-            event_id: notification.event_id,
-            event_name: notification.event.name,
-            title: notification.title,
-            contents: notification.contents,
-            created_at: notification.created_at
-          }
-          results.push(result)
-        end
-        render json: results
+        notifications = Notification.includes(:event  => {:users_events => :user})
+        .select('events.id as event_id, events.name as event_name, notifications.title, notifications.contents, notifications.created_at')
+        .where(:user => {:firebase_id => params[:uid]})
+        render json: notifications
       end
     end
   end
