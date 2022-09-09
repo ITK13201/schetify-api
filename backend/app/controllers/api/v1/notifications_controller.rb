@@ -7,7 +7,7 @@ module Api
 
       def index
         notifications = Notification.includes(event: { users_events: :user })
-                                    .select('events.id as event_id, events.name as event_name, title, contents, notifications.created_at')
+                                    .select('events.id as event_id, events.name as event_name, title, contents, notifications.created_at') # rubocop:disable Layout/LineLength
                                     .where(user: { firebase_id: params[:uid] })
         render json: notifications
       end
