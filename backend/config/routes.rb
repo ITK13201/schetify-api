@@ -19,4 +19,9 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  namespace 'links' do
+    get 'share', to: 'share#redirect_share_link'
+  end
+
 end
