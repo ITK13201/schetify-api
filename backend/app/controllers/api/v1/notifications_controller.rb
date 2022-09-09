@@ -12,6 +12,7 @@ module Api
             event_name: notification.event.name,
             title: notification.title,
             contents: notification.contents,
+            created_at: notification.created_at,
           }
           results.push(result)
         end
