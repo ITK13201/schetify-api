@@ -36,6 +36,7 @@ module Api
                       .where(id: event_id)
         render json: { message: 'event not found' }, status: :bad_request if events.length > 1
         event = events[0]
+        p events
         # users
         result_users = []
         event.users_events.each do |r|
@@ -123,9 +124,11 @@ module Api
       end
 
       private
+
       def event_params
         params[:cost_type] = params[:cost_type].nil? ? 0 : Event.cost_types[params[:cost_type]]
-        params.permit(:name, :description, :start_at, :end_at, :image_url, :location_name, :location_latitude, :location_longitude, :location_address, :group_num, :cost, :cost_type, :questionnaire_url, :pattern)
+        params.permit(:name, :description, :start_at, :end_at, :image_url, :location_name, :location_latitude,
+                      :location_longitude, :location_address, :group_num, :cost, :cost_type, :questionnaire_url, :pattern)
       end
     end
   end
