@@ -31,17 +31,17 @@ ApplicationRecord.transaction do
 
   events = []
   N.times do |t|
-    event_start_at = Faker::Time.between_dates(from: Date.today - 10, to: Date.today - 1)
+    event_start_at = Faker::Time.between_dates(from: Date.today + 5, to: Date.today + 25)
     event = {
       name: Faker::Restaurant.name,
       description: Faker::Restaurant.description,
       start_at: event_start_at,
-      end_at: Faker::Time.forward(days: 10),
+      end_at: Faker::Time.forward(days: 1),
       image_url: Faker::Internet.url,
       location_name: Faker::Restaurant.name,
-      location_address: Faker::Address.full_address,
-      location_latitude: Faker::Address.latitude,
-      location_longitude: Faker::Address.longitude,
+      location_address: Gimei.address.kanji,
+      location_latitude: Faker::Number.between(from: 35.5, to: 36.3),
+      location_longitude: Faker::Number.between(from: 130.0, to: 136.0),
       group_num: Faker::Number.between(from: 2, to: 100),
       cost: Faker::Number.between(from: 100, to: 100000),
       cost_type: Faker::Number.between(from: 0, to: 1),
@@ -58,7 +58,7 @@ ApplicationRecord.transaction do
     user_event_relation = {
       user_id: users.sample.id,
       event_id: user_event_relation_event.id,
-      label: Faker::Number.between(from: 0, to: 2),
+      label: Faker::Number.between(from: 0, to: 1),
       group_id: Faker::Number.between(from: 1, to: user_event_relation_event.group_num)
     }
     puts("Creating user_event_relation ##{t+1}")
