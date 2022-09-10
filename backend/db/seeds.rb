@@ -31,12 +31,9 @@ ApplicationRecord.transaction do
 
   events = []
   N.times do |t|
-    event_start_at = Faker::Time.between_dates(from: Date.today + 5, to: Date.today + 25)
     event = {
       name: Faker::Restaurant.name,
       description: Faker::Restaurant.description,
-      start_at: event_start_at,
-      end_at: Faker::Time.forward(days: 1),
       image_url: Faker::Internet.url,
       location_name: Faker::Restaurant.name,
       location_address: Gimei.address.kanji,
@@ -67,10 +64,11 @@ ApplicationRecord.transaction do
 
   schedule_candidates = []
   (N*80).times do |t|
+    event_start_at = Faker::Time.between_dates(from: Date.today + 5, to: Date.today + 25)
     schedule_candidate = {
       event_id: events.sample.id,
-      start_at: Faker::Time.between_dates(from: Date.today - 10, to: Date.today - 1),
-      end_at: Faker::Time.forward(days: 10),
+      start_at: event_start_at,
+      end_at: event_start_at + rand(1..5).hours,
     }
     puts("Creating schedule_candidate ##{t+1}")
     schedule_candidate = ScheduleCandidate.create(schedule_candidate)
